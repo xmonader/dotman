@@ -18,14 +18,13 @@ def get_linkable_files(apppath : str, dest:str =os.path.expanduser("~")) -> List
     dest: destination of the link files : default is the home of user.
     """
 
-    rootpath = apppath
     linkables = []
     for root, dirs, files in os.walk(apppath):
-        for d in dirs:
-            dirpath = os.path.join(root, d)
+        # for d in dirs:
+        #     dirpath = os.path.join(root, d)
         for f in files:
             filepath = os.path.join(root, f)
-            linkpath =  os.path.join(dest, filepath.replace(rootpath, ""))
+            linkpath =  os.path.join(dest, filepath.replace(apppath, ""))
             # remove leading /
             linkpath = linkpath[1:] if linkpath.startswith("/") else linkpath
             linkpath = os.path.join(dest, linkpath)

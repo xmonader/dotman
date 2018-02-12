@@ -32,7 +32,7 @@ def get_linkable_files(apppath : str, dest:str =os.path.expanduser("~")) -> List
         
     return linkables
 
-def stow(linkables:List[Tuple[str, str]], simulate:bool =True, verbose:bool =True):
+def stow(linkables:List[Tuple[str, str]], simulate:bool=True, verbose:bool=True, force:bool=False):
     """
     Creates symoblic links and related directories
 
@@ -47,4 +47,12 @@ def stow(linkables:List[Tuple[str, str]], simulate:bool =True, verbose:bool =Tru
 
         if not simulate:
             os.makedirs(os.path.dirname(linkpath), exist_ok=True)
-            os.symlink(filepath, linkpath)
+            if not os.path.exists(linkpath):
+                os.symlink(filepath, linkpath)
+            else:
+                if force:
+                    os.remove(linkpath)
+                    os.symlink(filepath, linkpath)
+                else:
+                    if verboose:
+                        print("skipping linking {} -> {}".format(filepath, linkpath))

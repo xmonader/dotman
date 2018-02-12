@@ -54,5 +54,5 @@ def stow(linkables:List[Tuple[str, str]], simulate:bool=True, verbose:bool=True,
                     os.remove(linkpath)
                     os.symlink(filepath, linkpath)
                 else:
-                    if verboose:
+                    if verbose:
                         print("skipping linking {} -> {}".format(filepath, linkpath))

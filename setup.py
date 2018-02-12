@@ -5,7 +5,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='dotman',
-      version='1.0.0',
+      version='1.1.0',
       author="Ahmed T. Youssef",
       author_email="xmonader@gmail.com",
       description='Manage your dotfiles easily.',
